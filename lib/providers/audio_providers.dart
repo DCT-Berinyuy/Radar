@@ -170,3 +170,79 @@ Future<List<double>> processAudio(
 
   return processed;
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Compression Engine Providers
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum CompressionPreset { fast, balanced, quality }
+enum CompressionStatus { idle, encoding, complete }
+
+final compressionFilePathProvider = StateProvider<String?>((ref) => null);
+final compressionFileSizeProvider = StateProvider<double?>((ref) => null);
+final compressionDurationProvider = StateProvider<double?>((ref) => null);
+final selectedPresetProvider = StateProvider<CompressionPreset>((ref) => CompressionPreset.balanced);
+
+final compressionProgressProvider = StateProvider<double>((ref) => 0.0);
+final compressionStatusProvider = StateProvider<CompressionStatus>((ref) => CompressionStatus.idle);
+
+final hardwareAccelProvider = StateProvider<bool>((ref) => false);
+final twoPassProvider = StateProvider<bool>((ref) => false);
+final stripMetadataProvider = StateProvider<bool>((ref) => false);
+final audioOnlyProvider = StateProvider<bool>((ref) => false);
+
+// FFmpeg simulated runtime logs
+final compressionLogsProvider = StateProvider<List<String>>((ref) => []);
+
+final estimatedSizeProvider = Provider<double?>((ref) {
+  final fileSize = ref.watch(compressionFileSizeProvider);
+  final duration = ref.watch(compressionDurationProvider);
+  final preset = ref.watch(selectedPresetProvider);
+
+  if (fileSize == null || duration == null) return null;
+
+  double videoKbps;
+  double audioKbps;
+
+  switch (preset) {
+    case CompressionPreset.fast:
+      videoKbps = 800;
+      audioKbps = 96;
+      break;
+    case CompressionPreset.balanced:
+      videoKbps = 1500;
+      audioKbps = 128;
+      break;
+    case CompressionPreset.quality:
+      videoKbps = 2500;
+      audioKbps = 128;
+      break;
+  }
+  
+  if (ref.watch(audioOnlyProvider)) {
+    videoKbps = 0;
+  }
+
+  // (video_bitrate + audio_bitrate) * duration / 8 / 1024
+  return ((videoKbps + audioKbps) * duration) / 8.0 / 1024.0;
+});
+
+final ffmpegCommandProvider = Provider<String>((ref) {
+  final preset = ref.watch(selectedPresetProvider);
+  final hwAccel = ref.watch(hardwareAccelProvider);
+  final stripMeta = ref.watch(stripMetadataProvider);
+  final audioOnly = ref.watch(audioOnlyProvider);
+  
+  final input = "input.mp4";
+  final output = "output_radar.mp4";
+  final codec = audioOnly ? "-vn" : "-c:v libx265";
+  final crf = preset == CompressionPreset.fast ? "28" : 
+              preset == CompressionPreset.balanced ? "24" : "20";
+  final speed = preset == CompressionPreset.fast ? "ultrafast" : 
+                preset == CompressionPreset.balanced ? "medium" : "slow";
+  final audio = "-c:a libopus -b:a ${preset == CompressionPreset.fast ? '96k' : '128k'}";
+  final hw = hwAccel ? "-hwaccel auto " : "";
+  final meta = stripMeta ? "-map_metadata -1 " : "";
+  
+  return "ffmpeg ${hw}-i $input $codec -crf $crf -preset $speed $audio ${meta}$output";
+});

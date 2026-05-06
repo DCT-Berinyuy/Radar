@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'theme/app_theme.dart';
 import 'screens/pipeline_screen.dart';
 import 'screens/denoiser_screen.dart';
+import 'screens/compression_screen.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Root nav-bar index provider
@@ -61,7 +62,7 @@ class _RootShell extends ConsumerWidget {
         children: const [
           PipelineScreen(),
           DenoiserScreen(),
-          _PlaceholderScreen(label: 'COMPRESS ENGINE'),
+          CompressionScreen(),
           _PlaceholderScreen(label: 'SETTINGS & SETUP'),
         ],
       ),

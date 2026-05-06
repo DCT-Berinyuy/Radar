@@ -30,24 +30,32 @@ class DenoiserScreen extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.sensors,
-                      color: AppColors.primaryFixedDim,
-                    ),
-                    const SizedBox(width: AppSpacing.sm),
-                    Text(
-                      'DENOISE ENGINE',
-                      style: AppTextStyles.h2(color: AppColors.primaryFixedDim)
-                          .copyWith(
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: -1,
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.sensors,
+                        color: AppColors.primaryFixedDim,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: AppSpacing.sm),
+                      Expanded(
+                        child: Text(
+                          'DENOISE ENGINE',
+                          style: AppTextStyles.h2(color: AppColors.primaryFixedDim)
+                              .copyWith(
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: -1,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: AppSpacing.sm),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -556,10 +564,12 @@ class _VisualizerSection extends ConsumerWidget {
           Container(
             color: AppColors.surfaceHigh,
             padding: const EdgeInsets.all(AppSpacing.sm),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
                   icon: const Icon(Icons.skip_previous),
                   color: AppColors.onSurfaceVariant,
                   onPressed: () {},
@@ -595,6 +605,7 @@ class _VisualizerSection extends ConsumerWidget {
                   onPressed: isComputing ? null : () => _computeProfile(ref),
                 ),
               ],
+            ),
             ),
           ),
         ],
