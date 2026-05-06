@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#3b4b37",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-primary-fixed": "#002203",
+                        "on-secondary-fixed-variant": "#004493",
+                        "surface-bright": "#393939",
+                        "on-tertiary-fixed": "#2c1701",
+                        "on-secondary-container": "#00285c",
+                        "on-primary": "#003907",
+                        "on-background": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "on-surface-variant": "#b9ccb2",
+                        "primary-fixed-dim": "#00e639",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#001a41",
+                        "background": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "surface-container-low": "#1c1b1b",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#442b10",
+                        "on-primary-container": "#007117",
+                        "error-container": "#93000a",
+                        "secondary": "#adc6ff",
+                        "inverse-primary": "#006e16",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed": "#72ff70",
+                        "on-primary-fixed-variant": "#00530e",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed-dim": "#e7bf99",
+                        "surface-variant": "#353534",
+                        "primary-container": "#00ff41",
+                        "tertiary-container": "#ffd5ae",
+                        "secondary-container": "#4b8eff",
+                        "tertiary": "#fff8f4",
+                        "on-tertiary-container": "#7a5b3c",
+                        "on-secondary": "#002e69",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "surface-tint": "#00e639",
+                        "primary": "#ebffe2",
+                        "outline": "#84967e",
+                        "surface-container-highest": "#353534",
+                        "on-tertiary-fixed-variant": "#5d4124",
+                        "tertiary-fixed": "#ffdcbd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "margin": "24px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "mono-label": ["JetBrains Mono"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "mono-data": ["JetBrains Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "mono-label": ["11px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "mono-data": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .segment-bar {
+            background-image: linear-gradient(90deg, transparent 50%, #131313 50%);
+            background-size: 8px 100%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen pb-20">
+<!-- TopAppBar from JSON -->
+<header class="flex justify-between items-center w-full px-gutter h-16 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant fixed top-0 z-50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="sensors">sensors</span>
+<h1 class="font-h2 text-h2 font-bold tracking-tighter text-primary-fixed-dim dark:text-primary-fixed-dim uppercase">RADAR_v1.0</h1>
+</div>
+<div class="font-mono-label text-mono-label text-primary-fixed-dim border border-primary-fixed-dim px-sm py-xs">
+            00:04:12
+        </div>
+</header>
+<main class="pt-20 px-gutter max-w-5xl mx-auto space-y-gutter">
+<!-- Screen Header -->
+<div class="py-md border-b border-outline-variant/30 flex justify-between items-end">
+<div>
+<p class="font-mono-label text-mono-label text-outline uppercase tracking-widest mb-xs">PHASE 03</p>
+<h2 class="font-h1 text-h1 text-on-surface uppercase">COMPRESSION ENGINE</h2>
+</div>
+<div class="hidden md:flex gap-xs">
+<div class="h-1 w-8 bg-primary-fixed-dim"></div>
+<div class="h-1 w-4 bg-outline-variant"></div>
+<div class="h-1 w-4 bg-outline-variant"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Bento Column: Controls -->
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Preset Selector Card -->
+<section class="bg-surface-container border border-outline-variant p-md">
+<h3 class="font-mono-label text-mono-label text-outline uppercase mb-md">PRESET CONFIGURATION</h3>
+<div class="flex flex-col md:flex-row gap-sm">
+<!-- Toggle Button: Fast -->
+<button class="flex-1 group border border-outline-variant p-md text-left hover:bg-surface-container-highest transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-mono-label text-mono-label text-on-surface-variant">01</span>
+<span class="material-symbols-outlined text-outline" data-icon="speed">speed</span>
+</div>
+<div class="font-h2 text-h2 uppercase mb-xs">Fast</div>
+<div class="font-mono-data text-mono-data text-primary-fixed-dim">CRF 24 / H.264</div>
+</button>
+<!-- Toggle Button: Balanced (Active) -->
+<button class="flex-1 group border border-primary-fixed-dim bg-primary-fixed-dim/5 p-md text-left relative">
+<div class="absolute top-0 right-0 p-1">
+<div class="w-1.5 h-1.5 bg-primary-fixed-dim shadow-[0_0_8px_rgba(0,230,57,0.8)]"></div>
+</div>
+<div class="flex justify-between items-start mb-sm">
+<span class="font-mono-label text-mono-label text-primary-fixed-dim">02</span>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="balance">balance</span>
+</div>
+<div class="font-h2 text-h2 uppercase mb-xs text-primary-fixed-dim">Balanced</div>
+<div class="font-mono-data text-mono-data text-primary-fixed-dim">CRF 20 / HEVC</div>
+</button>
+<!-- Toggle Button: Max Quality -->
+<button class="flex-1 group border border-outline-variant p-md text-left hover:bg-surface-container-highest transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-mono-label text-mono-label text-on-surface-variant">03</span>
+<span class="material-symbols-outlined text-outline" data-icon="high_quality">high_quality</span>
+</div>
+<div class="font-h2 text-h2 uppercase mb-xs">Max Quality</div>
+<div class="font-mono-data text-mono-data text-primary-fixed-dim">CRF 16 / PRORES</div>
+</button>
+</div>
+</section>
+<!-- Processing Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- File Delta Card -->
+<div class="bg-surface-container-low border border-outline-variant p-md flex flex-col justify-between h-40">
+<h3 class="font-mono-label text-mono-label text-outline uppercase">FILE SIZE PROJECTION</h3>
+<div class="flex items-baseline gap-md">
+<span class="font-h1 text-h1 text-outline">142<span class="text-body-sm font-mono-label ml-1">MB</span></span>
+<span class="material-symbols-outlined text-outline" data-icon="arrow_forward">arrow_forward</span>
+<span class="font-h1 text-h1 text-primary-fixed-dim">48<span class="text-body-sm font-mono-label ml-1">MB</span></span>
+</div>
+<div class="font-mono-data text-mono-data text-on-surface-variant">ESTIMATED REDUCTION: -66.2%</div>
+</div>
+<!-- Bitrate Monitor -->
+<div class="bg-surface-container-low border border-outline-variant p-md flex flex-col justify-between h-40">
+<h3 class="font-mono-label text-mono-label text-outline uppercase">ENGINE THROUGHPUT</h3>
+<div class="relative h-12 w-full bg-surface-container-highest">
+<div class="absolute inset-0 segment-bar opacity-20"></div>
+<div class="absolute inset-y-0 left-0 w-3/4 bg-primary-fixed-dim/20 border-r border-primary-fixed-dim"></div>
+</div>
+<div class="flex justify-between font-mono-data text-mono-data">
+<span class="text-on-surface-variant">TARGET: 4500 KBPS</span>
+<span class="text-primary-fixed-dim">LIVE: 4210 KBPS</span>
+</div>
+</div>
+</div>
+<!-- Technical Log -->
+<section class="bg-surface-container-lowest border border-outline-variant font-mono-data overflow-hidden">
+<div class="bg-surface-container-high px-md py-sm flex justify-between items-center border-b border-outline-variant">
+<span class="text-mono-label text-outline uppercase">FFmpeg_runtime_logs.txt</span>
+<span class="text-mono-label text-primary-fixed-dim">STATUS: RUNNING</span>
+</div>
+<div class="p-md h-48 overflow-y-auto text-on-surface-variant text-[12px] leading-relaxed">
+<p class="text-outline">[09:41:02] Initializing engine core v4.2.1-stable...</p>
+<p>[09:41:03] Stream #0:0(eng): Video: h264 (High) (avc1 / 0x31637661)</p>
+<p>[09:41:03] Stream #0:1(eng): Audio: aac (LC) (mp4a / 0x6134706d)</p>
+<p class="text-primary-fixed-dim">[09:41:05] frame=  412 fps= 62 q=24.0 size=    2560kB time=00:00:14.22 bitrate=1474.3kbits/s speed=2.1x</p>
+<p class="text-primary-fixed-dim">[09:41:08] frame=  855 fps= 61 q=23.0 size=    5842kB time=00:00:28.45 bitrate=1682.1kbits/s speed=2.0x</p>
+<p>[09:41:10] segment_marker_applied: p-frame continuity verified</p>
+<p class="text-primary-fixed-dim">[09:41:12] frame= 1240 fps= 60 q=24.0 size=    8912kB time=00:00:41.12 bitrate=1774.3kbits/s speed=1.9x</p>
+</div>
+</section>
+</div>
+<!-- Bento Column: Preview & Status -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Engine Visualization -->
+<div class="bg-surface border border-outline-variant aspect-square relative group">
+<img class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A high-contrast abstract visualization of digital data compression. Green glowing laser lines intersect across a deep charcoal background, creating a sense of a high-tech scanning process. The aesthetic is clinical and technical, featuring sharp geometric edges and minimal digital artifacts. The lighting is low-key, with the only illumination coming from the vibrant cyber green data streams." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwflu4kvJdr6Fv5Ykt4H7W1678-sl9mA42zKQGFWZSWvGehB5rO33mJMVSqRJ3Zw594YHb5kKPGg-hoopcV07hOrvRBD-nv0Zq-v7FLCDSambNqHApbjBeUj_BvsTLeDVbLp9Q2DxppWxry9wtFQwTC_EjiDsPnYxIz7441krUtmMa90ORTwD0LMjd7RxDtjM4Wq_bHNej0JQacstlsz1CtCjj-0_OedPP6oAilakCGnsIVBIQFaGx7G0X8vrgPraj7NHuqa_XIjM"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<div class="font-h1 text-h1 text-primary-fixed-dim drop-shadow-[0_0_15px_rgba(0,230,57,0.5)]">74%</div>
+<div class="font-mono-label text-mono-label text-on-surface uppercase tracking-widest mt-xs">TOTAL PROGRESS</div>
+</div>
+<!-- Scanline Overlay -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary-fixed-dim/5 to-transparent h-4 w-full top-1/4"></div>
+</div>
+<!-- Quick Actions -->
+<div class="bg-surface-container border border-outline-variant p-md space-y-md">
+<button class="w-full bg-primary-fixed-dim text-on-primary-fixed font-h2 py-md hover:brightness-110 transition-all uppercase flex items-center justify-center gap-md">
+<span class="material-symbols-outlined" data-icon="pause" data-weight="fill">pause</span>
+                        PAUSE ENGINE
+                    </button>
+<button class="w-full border border-error text-error font-mono-label py-sm hover:bg-error/10 transition-all uppercase">
+                        ABORT TASK
+                    </button>
+</div>
+<!-- Info Grid -->
+<div class="grid grid-cols-2 gap-sm">
+<div class="border border-outline-variant p-sm">
+<p class="text-mono-label text-outline uppercase mb-xs">TEMP</p>
+<p class="font-mono-data text-on-surface">64°C</p>
+</div>
+<div class="border border-outline-variant p-sm">
+<p class="text-mono-label text-outline uppercase mb-xs">THREADS</p>
+<p class="font-mono-data text-on-surface">16/24</p>
+</div>
+<div class="border border-outline-variant p-sm">
+<p class="text-mono-label text-outline uppercase mb-xs">MEMORY</p>
+<p class="font-mono-data text-on-surface">4.2GB</p>
+</div>
+<div class="border border-outline-variant p-sm">
+<p class="text-mono-label text-outline uppercase mb-xs">LATENCY</p>
+<p class="font-mono-data text-primary-fixed-dim">12MS</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar from JSON -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 bg-surface border-t border-outline-variant dark:border-outline-variant">
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline p-2 grayscale hover:text-primary-fixed-dim hover:bg-surface-container-low transition-all scale-95 duration-75">
+<span class="material-symbols-outlined" data-icon="settings_input_antenna">settings_input_antenna</span>
+<span class="font-mono-label text-mono-label uppercase mt-1">PIPELINE</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline p-2 grayscale hover:text-primary-fixed-dim hover:bg-surface-container-low transition-all scale-95 duration-75">
+<span class="material-symbols-outlined" data-icon="graphic_eq">graphic_eq</span>
+<span class="font-mono-label text-mono-label uppercase mt-1">DENOISE</span>
+</button>
+<!-- ACTIVE: ENGINE -->
+<button class="flex flex-col items-center justify-center text-on-primary-fixed bg-primary-fixed-dim rounded-0 p-2 border border-primary-fixed transition-all scale-95 duration-75">
+<span class="material-symbols-outlined" data-icon="compress" data-weight="fill">compress</span>
+<span class="font-mono-label text-mono-label uppercase mt-1">ENGINE</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline p-2 grayscale hover:text-primary-fixed-dim hover:bg-surface-container-low transition-all scale-95 duration-75">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-mono-label text-mono-label uppercase mt-1">SETUP</span>
+</button>
+</nav>
+</body></html>
