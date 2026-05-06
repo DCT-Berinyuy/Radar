@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'theme/app_theme.dart';
 import 'screens/pipeline_screen.dart';
+import 'screens/denoiser_screen.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Root nav-bar index provider
@@ -20,9 +21,9 @@ void main() {
 
   // Transparent system bars — let our dark surface bleed to the edge
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor:            Colors.transparent,
-    statusBarIconBrightness:   Brightness.light,
-    systemNavigationBarColor:  AppColors.surfaceContainer,
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: AppColors.surfaceContainer,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 
@@ -35,10 +36,10 @@ class RadarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:        'Radar',
+      title: 'Radar',
       debugShowCheckedModeBanner: false,
-      theme:        AppTheme.dark(),
-      home:         const _RootShell(),
+      theme: AppTheme.dark(),
+      home: const _RootShell(),
     );
   }
 }
@@ -59,7 +60,7 @@ class _RootShell extends ConsumerWidget {
         index: idx,
         children: const [
           PipelineScreen(),
-          _PlaceholderScreen(label: 'MEDIA DENOISER'),
+          DenoiserScreen(),
           _PlaceholderScreen(label: 'COMPRESS ENGINE'),
           _PlaceholderScreen(label: 'SETTINGS & SETUP'),
         ],
@@ -75,9 +76,12 @@ class _RootShell extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildNavItem(ref, 0, Icons.sensors, 'PIPELINE', isActive: idx == 0),
-            _buildNavItem(ref, 1, Icons.auto_awesome, 'DENOISE', isActive: idx == 1),
-            _buildNavItem(ref, 2, Icons.compress, 'COMPRESS', isActive: idx == 2),
+            _buildNavItem(ref, 0, Icons.sensors, 'PIPELINE',
+                isActive: idx == 0),
+            _buildNavItem(ref, 1, Icons.auto_awesome, 'DENOISE',
+                isActive: idx == 1),
+            _buildNavItem(ref, 2, Icons.compress, 'COMPRESS',
+                isActive: idx == 2),
             _buildNavItem(ref, 3, Icons.tune, 'SETTINGS', isActive: idx == 3),
           ],
         ),
@@ -85,7 +89,8 @@ class _RootShell extends ConsumerWidget {
     );
   }
 
-  Widget _buildNavItem(WidgetRef ref, int index, IconData icon, String label, {required bool isActive}) {
+  Widget _buildNavItem(WidgetRef ref, int index, IconData icon, String label,
+      {required bool isActive}) {
     return Expanded(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -102,7 +107,8 @@ class _RootShell extends ConsumerWidget {
             Text(
               label,
               style: AppTextStyles.monoLabel(
-                color: isActive ? AppColors.primaryContainer : AppColors.outline,
+                color:
+                    isActive ? AppColors.primaryContainer : AppColors.outline,
               ),
             ),
           ],
@@ -128,18 +134,23 @@ class _PlaceholderScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 56, height: 56,
+              width: 56,
+              height: 56,
               decoration: BoxDecoration(
-                shape:  BoxShape.circle,
-                border: Border.all(color: AppColors.outlineVariant, width: AppStroke.hairline),
+                shape: BoxShape.circle,
+                border: Border.all(
+                    color: AppColors.outlineVariant, width: AppStroke.hairline),
               ),
               child: const Icon(Icons.hourglass_empty_rounded,
                   color: AppColors.onSurfaceVariant, size: 24),
             ),
             const SizedBox(height: AppSpacing.md),
-            Text(label, style: AppTextStyles.monoLabel(color: AppColors.onSurfaceVariant)),
+            Text(label,
+                style:
+                    AppTextStyles.monoLabel(color: AppColors.onSurfaceVariant)),
             const SizedBox(height: AppSpacing.xs),
-            Text('Coming soon', style: AppTextStyles.bodySm(color: AppColors.outline)),
+            Text('Coming soon',
+                style: AppTextStyles.bodySm(color: AppColors.outline)),
           ],
         ),
       ),

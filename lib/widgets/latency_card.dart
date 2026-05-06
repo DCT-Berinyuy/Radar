@@ -19,22 +19,22 @@ class LatencyCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final latency    = ref.watch(latencyProvider);
-    final isRecording= ref.watch(recordingStateProvider);
-    final cps        = ref.watch(chunksPerSecondProvider);
+    final latency = ref.watch(latencyProvider);
+    final isRecording = ref.watch(recordingStateProvider);
+    final cps = ref.watch(chunksPerSecondProvider);
 
     return Container(
       decoration: BoxDecoration(
-        color:        AppColors.surfaceContainer,
+        color: AppColors.surfaceContainer,
         borderRadius: BorderRadius.circular(AppRadius.base),
-        border:       Border.all(
+        border: Border.all(
           color: AppColors.outlineVariant,
           width: AppStroke.hairline,
         ),
       ),
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.md,
-        vertical:   AppSpacing.sm + 2,
+        vertical: AppSpacing.sm + 2,
       ),
       child: Row(
         children: [
@@ -54,9 +54,7 @@ class LatencyCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  latency != null
-                      ? '${latency.toStringAsFixed(2)} ms'
-                      : '— ms',
+                  latency != null ? '${latency.toStringAsFixed(2)} ms' : '— ms',
                   style: AppTextStyles.monoData(
                     color: isRecording
                         ? AppColors.cyberGreen
@@ -87,9 +85,8 @@ class LatencyCard extends ConsumerWidget {
               Text(
                 '$cps',
                 style: AppTextStyles.monoData(
-                  color: isRecording
-                      ? AppColors.cyberGreen
-                      : AppColors.onSurface,
+                  color:
+                      isRecording ? AppColors.cyberGreen : AppColors.onSurface,
                 ),
               ),
             ],
@@ -122,7 +119,7 @@ class _LedDot extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width:  10,
+      width: 10,
       height: 10,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -134,8 +131,8 @@ class _LedDot extends StatelessWidget {
         boxShadow: active
             ? [
                 BoxShadow(
-                  color:       AppColors.cyberGreen.withValues(alpha: 0.55),
-                  blurRadius:  6,
+                  color: AppColors.cyberGreen.withValues(alpha: 0.55),
+                  blurRadius: 6,
                   spreadRadius: 1,
                 )
               ]
@@ -156,14 +153,14 @@ class _StatusChip extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.sm,
-        vertical:   3,
+        vertical: 3,
       ),
       decoration: BoxDecoration(
-        color:        active
+        color: active
             ? AppColors.cyberGreen.withValues(alpha: 0.12)
             : AppColors.surfaceHigh,
         borderRadius: BorderRadius.circular(AppRadius.sm),
-        border:       Border.all(
+        border: Border.all(
           color: active ? AppColors.cyberGreen : AppColors.outline,
           width: AppStroke.hairline,
         ),

@@ -23,15 +23,16 @@ class WaveformChart extends ConsumerStatefulWidget {
   ConsumerState<WaveformChart> createState() => _WaveformChartState();
 }
 
-class _WaveformChartState extends ConsumerState<WaveformChart> with SingleTickerProviderStateMixin {
+class _WaveformChartState extends ConsumerState<WaveformChart>
+    with SingleTickerProviderStateMixin {
   late AnimationController _scanlineController;
 
   @override
   void initState() {
     super.initState();
     _scanlineController = AnimationController(
-       vsync: this,
-       duration: const Duration(seconds: 2),
+      vsync: this,
+      duration: const Duration(seconds: 2),
     )..repeat();
   }
 
@@ -52,9 +53,9 @@ class _WaveformChartState extends ConsumerState<WaveformChart> with SingleTicker
 
     return Container(
       decoration: BoxDecoration(
-        color:        AppColors.surfaceLowest,
+        color: AppColors.surfaceLowest,
         borderRadius: BorderRadius.circular(AppRadius.base),
-        border:       Border.all(
+        border: Border.all(
           color: AppColors.outlineVariant,
           width: AppStroke.hairline,
         ),
@@ -64,31 +65,31 @@ class _WaveformChartState extends ConsumerState<WaveformChart> with SingleTicker
           Padding(
             padding: const EdgeInsets.all(AppSpacing.sm),
             child: LineChart(
-               _buildChartData(spots),
-               duration: const Duration(milliseconds: 0), // instant — no tween lag
+              _buildChartData(spots),
+              duration:
+                  const Duration(milliseconds: 0), // instant — no tween lag
             ),
           ),
           AnimatedBuilder(
-            animation: _scanlineController,
-            builder: (context, child) {
-               return Align(
-                 alignment: Alignment(-1.0 + (_scanlineController.value * 2.0), 0.0),
-                 child: Container(
-                   width: 2,
-                   decoration: BoxDecoration(
-                     color: AppColors.primaryContainer,
-                     boxShadow: [
-                       BoxShadow(
-                         color: AppColors.primaryContainer.withValues(alpha: 0.6),
-                         blurRadius: 8,
-                         spreadRadius: 2,
-                       )
-                     ]
-                   ),
-                 )
-               );
-            }
-          ),
+              animation: _scanlineController,
+              builder: (context, child) {
+                return Align(
+                    alignment: Alignment(
+                        -1.0 + (_scanlineController.value * 2.0), 0.0),
+                    child: Container(
+                      width: 2,
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryContainer,
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primaryContainer
+                                  .withValues(alpha: 0.6),
+                              blurRadius: 8,
+                              spreadRadius: 2,
+                            )
+                          ]),
+                    ));
+              }),
         ],
       ),
     );
@@ -99,18 +100,18 @@ class _WaveformChartState extends ConsumerState<WaveformChart> with SingleTicker
       // ── Clip & grid ──────────────────────────────────────────────────────
       clipData: const FlClipData.all(),
       gridData: FlGridData(
-        show:               true,
-        drawVerticalLine:   true,
+        show: true,
+        drawVerticalLine: true,
         drawHorizontalLine: true,
         horizontalInterval: 0.5,
-        verticalInterval:   20,
+        verticalInterval: 20,
         getDrawingHorizontalLine: (_) => const FlLine(
-          color:         AppColors.waveformGrid,
-          strokeWidth:   AppStroke.hairline,
+          color: AppColors.waveformGrid,
+          strokeWidth: AppStroke.hairline,
         ),
         getDrawingVerticalLine: (_) => const FlLine(
-          color:         AppColors.waveformGrid,
-          strokeWidth:   AppStroke.hairline,
+          color: AppColors.waveformGrid,
+          strokeWidth: AppStroke.hairline,
         ),
       ),
 
@@ -124,20 +125,20 @@ class _WaveformChartState extends ConsumerState<WaveformChart> with SingleTicker
       minX: 0,
       maxX: 99,
       minY: -1.0,
-      maxY:  1.0,
+      maxY: 1.0,
 
       // ── Waveform line ────────────────────────────────────────────────────
       lineBarsData: [
         LineChartBarData(
-          spots:              spots,
-          isCurved:           true,
-          curveSmoothness:    0.2,
-          color:              AppColors.cyberGreen,
-          barWidth:           AppStroke.waveformLine,
-          isStrokeCapRound:   false, // butt caps — "plotted" engineered spec
-          dotData:            const FlDotData(show: false),
-          belowBarData:       BarAreaData(
-            show:  true,
+          spots: spots,
+          isCurved: true,
+          curveSmoothness: 0.2,
+          color: AppColors.cyberGreen,
+          barWidth: AppStroke.waveformLine,
+          isStrokeCapRound: false, // butt caps — "plotted" engineered spec
+          dotData: const FlDotData(show: false),
+          belowBarData: BarAreaData(
+            show: true,
             color: AppColors.cyberGreen.withValues(alpha: 0.06),
           ),
         ),
