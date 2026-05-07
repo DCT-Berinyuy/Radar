@@ -12,92 +12,55 @@ class DenoiserScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColors.surface,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(64),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: AppColors.surface,
-            border: Border(
-              bottom: BorderSide(
-                color: AppColors.outlineVariant,
-                width: AppStroke.hairline,
+      appBar: AppBar(
+        backgroundColor: AppColors.surfaceContainer,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.sensors, color: AppColors.primaryFixedDim, size: 20),
+            const SizedBox(width: AppSpacing.sm),
+            Flexible(
+              child: Text(
+                'RADAR_v1.0',
+                style: AppTextStyles.monoLabel(color: AppColors.primaryFixedDim)
+                    .copyWith(fontSize: 13, letterSpacing: 1),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.gutter),
-          child: SafeArea(
-            bottom: false,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.sensors,
-                        color: AppColors.primaryFixedDim,
-                      ),
-                      const SizedBox(width: AppSpacing.sm),
-                      Expanded(
-                        child: Text(
-                          'DENOISE ENGINE',
-                          style: AppTextStyles.h2(color: AppColors.primaryFixedDim)
-                              .copyWith(
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -1,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.sm,
-                        vertical: AppSpacing.xs,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceHighest,
-                        border: Border.all(
-                          color:
-                              AppColors.primaryFixedDim.withValues(alpha: 0.2),
-                        ),
-                      ),
-                      child: Text(
-                        'SESSION: 00:04:12',
-                        style: AppTextStyles.monoLabel(
-                            color: AppColors.primaryFixedDim),
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacing.md),
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        hoverColor: AppColors.surfaceHighest,
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.settings,
-                            color: AppColors.onSurfaceVariant,
-                            size: 24,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            const SizedBox(width: AppSpacing.sm),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                border: Border.all(
+                    color: AppColors.primaryFixedDim.withValues(alpha: 0.4)),
+              ),
+              child: Text(
+                'PHASE 02',
+                style: AppTextStyles.monoLabel(color: AppColors.primaryFixedDim)
+                    .copyWith(fontSize: 9, letterSpacing: 1.5),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: AppSpacing.gutter),
+            child: Text(
+              'DENOISE',
+              style: AppTextStyles.monoLabel(color: AppColors.onSurfaceVariant)
+                  .copyWith(fontSize: 10, letterSpacing: 1),
             ),
           ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(AppStroke.hairline),
+          child: Container(
+              color: AppColors.outlineVariant, height: AppStroke.hairline),
         ),
       ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.gutter),

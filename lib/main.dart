@@ -5,6 +5,7 @@ import 'theme/app_theme.dart';
 import 'screens/pipeline_screen.dart';
 import 'screens/denoiser_screen.dart';
 import 'screens/compression_screen.dart';
+import 'screens/settings_screen.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Root nav-bar index provider
@@ -63,7 +64,7 @@ class _RootShell extends ConsumerWidget {
           PipelineScreen(),
           DenoiserScreen(),
           CompressionScreen(),
-          _PlaceholderScreen(label: 'SETTINGS & SETUP'),
+          SettingsScreen(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -119,42 +120,5 @@ class _RootShell extends ConsumerWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Placeholder screens for nav items 2–4 (not yet designed)
-// ─────────────────────────────────────────────────────────────────────────────
-class _PlaceholderScreen extends StatelessWidget {
-  const _PlaceholderScreen({required this.label});
-  final String label;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.surface,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 56,
-              height: 56,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                    color: AppColors.outlineVariant, width: AppStroke.hairline),
-              ),
-              child: const Icon(Icons.hourglass_empty_rounded,
-                  color: AppColors.onSurfaceVariant, size: 24),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            Text(label,
-                style:
-                    AppTextStyles.monoLabel(color: AppColors.onSurfaceVariant)),
-            const SizedBox(height: AppSpacing.xs),
-            Text('Coming soon',
-                style: AppTextStyles.bodySm(color: AppColors.outline)),
-          ],
-        ),
-      ),
-    );
-  }
-}
+

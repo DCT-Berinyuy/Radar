@@ -14,125 +14,73 @@ class CompressionScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColors.surface,
-      body: SafeArea(
-        child: Column(
+      appBar: AppBar(
+        backgroundColor: AppColors.surfaceContainer,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            const _TopNavBar(),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(AppSpacing.gutter),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const _CompressionHeader(),
-                    const SizedBox(height: AppSpacing.xl),
-                    const _FileIngestionSection(),
-                    const SizedBox(height: AppSpacing.gutter),
-                    const _PresetSelectorSection(),
-                    const SizedBox(height: AppSpacing.gutter),
-                    const _ProjectionCard(),
-                    const SizedBox(height: AppSpacing.gutter),
-                    const _AdvancedParametersCard(),
-                    const SizedBox(height: AppSpacing.gutter),
-                    const _CommandPreview(),
-                    const SizedBox(height: AppSpacing.xl),
-                    const _CompressionControls(),
-                    const SizedBox(height: AppSpacing.xl),
-                    const _OutputSection(),
-                  ],
-                ),
+            const Icon(Icons.sensors, color: AppColors.primaryFixedDim, size: 20),
+            const SizedBox(width: AppSpacing.sm),
+            Flexible(
+              child: Text(
+                'RADAR_v1.0',
+                style: AppTextStyles.monoLabel(color: AppColors.primaryFixedDim)
+                    .copyWith(fontSize: 13, letterSpacing: 1),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.primaryFixedDim.withValues(alpha: 0.4)),
+              ),
+              child: Text(
+                'PHASE 03',
+                style: AppTextStyles.monoLabel(color: AppColors.primaryFixedDim)
+                    .copyWith(fontSize: 9, letterSpacing: 1.5),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _TopNavBar extends StatelessWidget {
-  const _TopNavBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 64,
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(
-          bottom: BorderSide(
-            color: AppColors.outlineVariant,
-            width: AppStroke.hairline,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: AppSpacing.gutter),
+            child: Text(
+              'COMPRESS',
+              style: AppTextStyles.monoLabel(color: AppColors.onSurfaceVariant)
+                  .copyWith(fontSize: 10, letterSpacing: 1),
+            ),
           ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(AppStroke.hairline),
+          child: Container(color: AppColors.outlineVariant, height: AppStroke.hairline),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.gutter),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.sensors,
-                color: AppColors.primaryFixedDim,
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Text(
-                'RADAR_v1.0',
-                style: AppTextStyles.h2(color: AppColors.primaryFixedDim)
-                    .copyWith(
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: -1,
-                ),
-              ),
-            ],
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.sm,
-              vertical: AppSpacing.xs,
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.surfaceHighest,
-              border: Border.all(
-                color: AppColors.primaryFixedDim.withValues(alpha: 0.3),
-                width: 1,
-              ),
-            ),
-            child: Text(
-              '00:04:12',
-              style: AppTextStyles.monoLabel(color: AppColors.primaryFixedDim),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _CompressionHeader extends StatelessWidget {
-  const _CompressionHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'PHASE 03',
-            style: AppTextStyles.monoLabel(color: AppColors.outline)
-                .copyWith(letterSpacing: 2),
-          ),
-          const SizedBox(height: AppSpacing.xs),
-          Text(
-            'COMPRESSION ENGINE',
-            style: AppTextStyles.h1(color: AppColors.onSurface),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          const Divider(color: AppColors.outlineVariant, thickness: 1),
-        ],
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSpacing.gutter),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: const [
+            _FileIngestionSection(),
+            SizedBox(height: AppSpacing.gutter),
+            _PresetSelectorSection(),
+            SizedBox(height: AppSpacing.gutter),
+            _ProjectionCard(),
+            SizedBox(height: AppSpacing.gutter),
+            _AdvancedParametersCard(),
+            SizedBox(height: AppSpacing.gutter),
+            _CommandPreview(),
+            SizedBox(height: AppSpacing.xl),
+            _CompressionControls(),
+            SizedBox(height: AppSpacing.xl),
+            _OutputSection(),
+            SizedBox(height: AppSpacing.xl),
+          ],
+        ),
       ),
     );
   }
@@ -159,7 +107,6 @@ class _FileIngestionSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final fileName = ref.watch(compressionFilePathProvider);
     final fileSize = ref.watch(compressionFileSizeProvider);
-    final duration = ref.watch(compressionDurationProvider);
 
     return Container(
       decoration: BoxDecoration(
@@ -265,20 +212,24 @@ class _PresetSelectorSection extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(icon, color: isActive ? AppColors.primaryContainer : AppColors.outline),
+              Icon(icon, color: isActive ? AppColors.primaryContainer : AppColors.outline, size: 18),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 title,
-                style: AppTextStyles.h2(
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.monoData(
                   color: isActive ? AppColors.primaryContainer : AppColors.onSurface,
-                ),
+                ).copyWith(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: 0.5),
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 spec,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.monoLabel(
                   color: isActive ? AppColors.primaryContainer : AppColors.outline,
-                ).copyWith(fontSize: 10),
+                ).copyWith(fontSize: 9),
               ),
             ],
           ),
@@ -393,7 +344,9 @@ class _AdvancedParametersCard extends ConsumerWidget {
         Switch(
           value: val,
           onChanged: (newVal) => ref.read(provider.notifier).state = newVal,
-          activeColor: AppColors.primaryContainer,
+          activeThumbColor: AppColors.primaryFixedDim,
+          activeTrackColor: AppColors.primaryFixedDim.withValues(alpha: 0.25),
+          inactiveThumbColor: AppColors.onSurfaceVariant,
           inactiveTrackColor: AppColors.surfaceHighest,
         ),
       ],
